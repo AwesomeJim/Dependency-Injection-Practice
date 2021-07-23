@@ -41,7 +41,7 @@ class LoginActivity : AppCompatActivity() {
 
         // Creates ViewModel and listens for the loginState LiveData
         loginViewModel = LoginViewModel((application as MyApplication).userManager)
-        loginViewModel.loginState.observe(this, Observer<LoginViewState> { state ->
+        loginViewModel.loginState.observe(this, { state ->
             when (state) {
                 is LoginSuccess -> {
                     startActivity(Intent(this, MainActivity::class.java))

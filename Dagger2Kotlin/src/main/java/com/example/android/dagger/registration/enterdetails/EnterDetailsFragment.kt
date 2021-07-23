@@ -58,8 +58,8 @@ class EnterDetailsFragment : Fragment() {
         registrationViewModel = (activity as RegistrationActivity).registrationViewModel
 
         enterDetailsViewModel = EnterDetailsViewModel()
-        enterDetailsViewModel.enterDetailsState.observe(this,
-            Observer<EnterDetailsViewState> { state ->
+        enterDetailsViewModel.enterDetailsState.observe(viewLifecycleOwner,
+            { state ->
                 when (state) {
                     is EnterDetailsSuccess -> {
 
