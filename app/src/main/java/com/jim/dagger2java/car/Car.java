@@ -2,8 +2,11 @@ package com.jim.dagger2java.car;
 
 import android.util.Log;
 
+import com.jim.dagger2java.dagger.PerActivity;
+
 import javax.inject.Inject;
 
+@PerActivity
 public class Car {
     private static final String TAG = "Car";
 
