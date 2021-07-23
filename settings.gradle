@@ -1,2 +1,2 @@
 rootProject.name = "Dagger2Java"
-include ':app'
+include ':Dagger2java'
