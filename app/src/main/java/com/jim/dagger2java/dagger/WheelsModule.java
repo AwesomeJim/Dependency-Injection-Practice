@@ -7,9 +7,11 @@ import com.jim.dagger2java.car.Wheels;
 
 import dagger.Module;
 import dagger.Provides;
-
+/*
+make you module abstract if all the provider methods are static
+ */
 @Module
-public class WheelsModule {
+public abstract class WheelsModule {
 
     @Provides
     static Rims provideRims() {
