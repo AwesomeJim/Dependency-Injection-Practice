@@ -34,6 +34,7 @@ public class Car {
     public void drive(){
         engine.start();
         Log.e(TAG, "drive: started=============" );
+        Log.e(TAG, driver.name + " drives ");
         Log.e(TAG, driver + " drives " + this);
     }
 }

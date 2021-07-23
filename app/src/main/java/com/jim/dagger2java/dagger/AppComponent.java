@@ -12,5 +12,11 @@ public interface AppComponent {
 
    //generated as inner class
    //ActivityComponent getActivityComponent(DieselEngineModule dieselEngineModule);
-   ActivityComponent.Builder getActivityComponentBuilder();
+   ActivityComponent.Factory getActivityComponentFactory();
+
+
+   @Component.Factory
+   interface Factory {
+      AppComponent create(DriverModule driverModule);
+   }
 }
