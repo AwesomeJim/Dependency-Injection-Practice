@@ -33,10 +33,10 @@ class MainActivity : AppCompatActivity() {
 
     // @Inject annotated fields will be provided by Dagger
     @Inject
-    private lateinit var userManager: UserManager
+     lateinit var userManager: UserManager
 
     @Inject
-    private lateinit var mainViewModel: MainViewModel
+     lateinit var mainViewModel: MainViewModel
 
 
     /**

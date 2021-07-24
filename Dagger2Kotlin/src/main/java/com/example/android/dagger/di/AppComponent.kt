@@ -2,7 +2,7 @@ package com.example.android.dagger.di
 
 import android.content.Context
 import com.example.android.dagger.main.MainActivity
-import com.example.android.dagger.registration.RegistrationActivity
+import com.example.android.dagger.settings.SettingsActivity
 import dagger.BindsInstance
 import dagger.Component
 import javax.inject.Singleton
@@ -16,7 +16,7 @@ import javax.inject.Singleton
  */
 // Definition of a Dagger component that adds info from the StorageModule to the graph
 @Singleton
-@Component(modules = [StorageModule::class])
+@Component(modules = [StorageModule::class, AppSubcomponents::class])
 interface AppComponent {
 
     // Factory to create instances of the AppComponent
@@ -35,9 +35,21 @@ interface AppComponent {
         fun create(@BindsInstance context: Context): AppComponent
     }
 
+    /**
+     * There are two different ways to interact with the Dagger graph:
+
+    Declaring a function that returns Unit and takes a class as a parameter allows field injection in that class (e.g. fun inject(activity: MainActivity)).
+    Declaring a function that returns a type allows retrieving types from the graph (e.g. fun registrationComponent(): RegistrationComponent.Factory).
+
+
+     * @return RegistrationComponent.Factory
+     */
     // Classes that can be injected by this Component
-    fun inject(activity: RegistrationActivity)
+   // Expose RegistrationComponent factory from the graph
+    fun registrationComponent(): RegistrationComponent.Factory
+
     fun inject(activity: MainActivity)
+    fun inject(activity: SettingsActivity)
 
 
 }
