@@ -23,10 +23,20 @@ import androidx.appcompat.app.AppCompatActivity
 import com.example.android.dagger.MyApplication
 import com.example.android.dagger.R
 import com.example.android.dagger.login.LoginActivity
+import com.example.android.dagger.user.UserManager
+import dagger.hilt.EntryPoint
+import dagger.hilt.InstallIn
+import dagger.hilt.android.EntryPointAccessors
+import dagger.hilt.components.SingletonComponent
 import javax.inject.Inject
 
 class SettingsActivity : AppCompatActivity() {
 
+    @InstallIn(SingletonComponent::class)
+    @EntryPoint
+    interface UserManagerEntryPoint {
+        fun userManager(): UserManager
+    }
     // @Inject annotated fields will be provided by Dagger
     @Inject
     lateinit var settingsViewModel: SettingsViewModel
@@ -35,7 +45,10 @@ class SettingsActivity : AppCompatActivity() {
 
         // Gets the userManager from the application graph to obtain the UserComponent
         // and gets this Activity injected
-        val userManager = (application as MyApplication).appComponent.userManager()
+       // val userManager = (application as MyApplication).appComponent.userManager()
+        val entryPoint = EntryPointAccessors.fromApplication(applicationContext, UserManagerEntryPoint::class.java)
+        val userManager = entryPoint.userManager()
+
         userManager.userComponent!!.inject(this)
 
         super.onCreate(savedInstanceState)

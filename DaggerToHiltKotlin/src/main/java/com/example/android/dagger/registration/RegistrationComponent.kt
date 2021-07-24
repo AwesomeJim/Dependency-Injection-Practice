@@ -21,6 +21,7 @@ import com.example.android.dagger.registration.enterdetails.EnterDetailsFragment
 import com.example.android.dagger.registration.termsandconditions.TermsAndConditionsFragment
 import dagger.Subcomponent
 
+/**
 // Scope annotation that the RegistrationComponent uses
 // Classes annotated with @ActivityScope will have a unique instance in this Component
 @ActivityScope
@@ -38,4 +39,14 @@ interface RegistrationComponent {
     fun inject(activity: RegistrationActivity)
     fun inject(fragment: EnterDetailsFragment)
     fun inject(fragment: TermsAndConditionsFragment)
-}
+
+Migrating an Activity and Fragment components
+
+In this section you will migrate the registration flow. To plan the migration let's take a look at RegistrationComponent.
+Open RegistrationComponent.kt and scroll down to the inject() function. RegistrationComponent is responsible for injecting dependencies to RegistrationActivity,
+EnterDetailsFragment, and TermsAndConditionsFragment.
+
+With this change, you migrated all activities and fragments listed in the RegistrationComponent so you can delete RegistrationComponent.kt.
+
+Let's start with migrating the RegistrationActivity. Open RegistrationActivity.kt and annotate the class with @AndroidEntryPoint.
+}*/
