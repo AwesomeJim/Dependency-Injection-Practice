@@ -19,6 +19,7 @@ package com.example.android.dagger.settings
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import com.example.android.dagger.MyApplication
 import com.example.android.dagger.R
@@ -31,32 +32,32 @@ import dagger.hilt.android.EntryPointAccessors
 import dagger.hilt.components.SingletonComponent
 import javax.inject.Inject
 
-
 @AndroidEntryPoint
 class SettingsActivity : AppCompatActivity() {
 
-/*
-     @InstallIn(SingletonComponent::class)
-    @EntryPoint
-    interface UserManagerEntryPoint {
-        fun userManager(): UserManager
-    }*/
+    /*
+         @InstallIn(SingletonComponent::class)
+        @EntryPoint
+        interface UserManagerEntryPoint {
+            fun userManager(): UserManager
+        }*/
     // @Inject annotated fields will be provided by Dagger
-    @Inject
-    lateinit var settingsViewModel: SettingsViewModel
+/*    @Inject
+    lateinit var settingsViewModel: SettingsViewModel*/
+    private val settingsViewModel: SettingsViewModel by viewModels()
+
     @Inject
     lateinit var userManager: UserManager
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
 
         // Gets the userManager from the application graph to obtain the UserComponent
         // and gets this Activity injected
-       // val userManager = (application as MyApplication).appComponent.userManager()
-   /*     val entryPoint = EntryPointAccessors.fromApplication(applicationContext, UserManagerEntryPoint::class.java)
-        val userManager = entryPoint.userManager()
+        // val userManager = (application as MyApplication).appComponent.userManager()
+        /*     val entryPoint = EntryPointAccessors.fromApplication(applicationContext, UserManagerEntryPoint::class.java)
+             val userManager = entryPoint.userManager()
 
-        userManager.userComponent!!.inject(this)*/
+             userManager.userComponent!!.inject(this)*/
 
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_settings)
@@ -71,8 +72,8 @@ class SettingsActivity : AppCompatActivity() {
             settingsViewModel.logout()
             val intent = Intent(this, LoginActivity::class.java)
             intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP or
-                    Intent.FLAG_ACTIVITY_CLEAR_TASK or
-                    Intent.FLAG_ACTIVITY_NEW_TASK
+                Intent.FLAG_ACTIVITY_CLEAR_TASK or
+                Intent.FLAG_ACTIVITY_NEW_TASK
             startActivity(intent)
         }
     }

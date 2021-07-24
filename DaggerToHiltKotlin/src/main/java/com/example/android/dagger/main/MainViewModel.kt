@@ -16,7 +16,9 @@
 
 package com.example.android.dagger.main
 
+import androidx.lifecycle.ViewModel
 import com.example.android.dagger.user.UserDataRepository
+import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
 /**
@@ -27,7 +29,8 @@ import javax.inject.Inject
  * that UserDataRepository is a dependency.
  */
 
-class MainViewModel @Inject constructor(private val userDataRepository: UserDataRepository) {
+@HiltViewModel
+class MainViewModel @Inject constructor(private val userDataRepository: UserDataRepository) : ViewModel(){
 
     val welcomeText: String
         get() = "Hello ${userDataRepository.username}!"

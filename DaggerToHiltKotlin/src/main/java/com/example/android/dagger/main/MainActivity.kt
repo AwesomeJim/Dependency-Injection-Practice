@@ -20,6 +20,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
 import android.widget.TextView
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import com.example.android.dagger.MyApplication
 import com.example.android.dagger.R
@@ -34,10 +35,8 @@ import dagger.hilt.android.EntryPointAccessors
 import dagger.hilt.components.SingletonComponent
 import javax.inject.Inject
 
-
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
-
 
 /*
     @InstallIn(SingletonComponent::class)
@@ -47,14 +46,13 @@ class MainActivity : AppCompatActivity() {
     }
 */
 
-
     // @Inject annotated fields will be provided by Dagger
-    @Inject
-    lateinit var mainViewModel: MainViewModel
+//    @Inject
+//    lateinit var mainViewModel: MainViewModel
+    private val mainViewModel: MainViewModel by viewModels()
 
     @Inject
     lateinit var userManager: UserManager
-
 
     /**
      * If the User is not registered, RegistrationActivity will be launched,
@@ -65,10 +63,10 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
 
         // Grabs instance of UserManager from the application graph
-       // val userManager = (application as MyApplication).appComponent.userManager()
+        // val userManager = (application as MyApplication).appComponent.userManager()
 
- /*       val entryPoint = EntryPointAccessors.fromApplication(applicationContext, UserManagerEntryPoint::class.java)
-        val userManager = entryPoint.userManager()*/
+        /*       val entryPoint = EntryPointAccessors.fromApplication(applicationContext, UserManagerEntryPoint::class.java)
+               val userManager = entryPoint.userManager()*/
 
         if (!userManager.isUserLoggedIn()) {
             if (!userManager.isUserRegistered()) {
@@ -83,7 +81,7 @@ class MainActivity : AppCompatActivity() {
 
             // If the MainActivity needs to be displayed, we get the UserComponent from the
             // application graph and gets this Activity injected
-          //  userManager.userComponent!!.inject(this)
+            //  userManager.userComponent!!.inject(this)
             setupViews()
         }
     }
