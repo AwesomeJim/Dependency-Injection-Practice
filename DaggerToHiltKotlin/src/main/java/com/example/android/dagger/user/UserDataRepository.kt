@@ -17,7 +17,6 @@
 package com.example.android.dagger.user
 
 import javax.inject.Inject
-import javax.inject.Singleton
 import kotlin.random.Random
 
 /**
@@ -26,14 +25,13 @@ import kotlin.random.Random
  * This object will have a unique instance in a Component that is annotated with
  * @LoggedUserScope (i.e. only UserComponent in this case).
  */
-@Singleton
-class UserDataRepository @Inject constructor() {
+@LoggedUserScope
+class UserDataRepository @Inject constructor(private val userManager: UserManager) {
 
-    var username: String? = null
-        private set
+    val username: String
+        get() = userManager.username
 
-    var unreadNotifications: Int? = null
-        private set
+    var unreadNotifications: Int
 
     init {
         unreadNotifications = randomInt()
@@ -42,17 +40,8 @@ class UserDataRepository @Inject constructor() {
     fun refreshUnreadNotifications() {
         unreadNotifications = randomInt()
     }
-    fun initData(username: String) {
-        this.username = username
-        this.unreadNotifications = randomInt()
-    }
+}
 
-    fun cleanUp() {
-        username = null
-        unreadNotifications = -1
-    }
-
-    private fun randomInt(): Int {
-        return Random.nextInt(until = 100)
-    }
+fun randomInt(): Int {
+    return Random.nextInt(until = 100)
 }

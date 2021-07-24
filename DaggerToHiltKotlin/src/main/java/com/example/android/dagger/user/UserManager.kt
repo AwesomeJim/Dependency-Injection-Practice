@@ -34,20 +34,28 @@ class UserManager @Inject constructor(
     private val storage: Storage,
     // Since UserManager will be in charge of managing the UserComponent lifecycle,
     // it needs to know how to create instances of it
-    private val userDataRepository: UserDataRepository
+    private val userComponentFactory: UserComponent.Factory
 ) {
+
+    /**
+     *  UserComponent is specific to a logged in user. Holds an instance of UserComponent.
+     *  This determines if the user is logged in or not, when the user logs in,
+     *  a new Component will be created. When the user logs out, this will be null.
+     */
+    var userComponent: UserComponent? = null
+        private set
 
     val username: String
         get() = storage.getString(REGISTERED_USER)
 
-    fun isUserLoggedIn() = userDataRepository.username != null
+    fun isUserLoggedIn() = userComponent != null
 
     fun isUserRegistered() = storage.getString(REGISTERED_USER).isNotEmpty()
 
     fun registerUser(username: String, password: String) {
         storage.setString(REGISTERED_USER, username)
         storage.setString("$username$PASSWORD_SUFFIX", password)
-        userJustLoggedIn(username)
+        userJustLoggedIn()
     }
 
     fun loginUser(username: String, password: String): Boolean {
@@ -57,12 +65,13 @@ class UserManager @Inject constructor(
         val registeredPassword = storage.getString("$username$PASSWORD_SUFFIX")
         if (registeredPassword != password) return false
 
-        userJustLoggedIn(username)
+        userJustLoggedIn()
         return true
     }
 
     fun logout() {
-        userDataRepository.cleanUp()
+        // When the user logs out, we remove the instance of UserComponent from memory
+        userComponent = null
     }
 
     fun unregister() {
@@ -72,8 +81,8 @@ class UserManager @Inject constructor(
         logout()
     }
 
-    private fun userJustLoggedIn(username: String) {
-        // When the user logs in, we create populate data in UserComponent
-        userDataRepository.initData(username)
+    private fun userJustLoggedIn() {
+        // When the user logs in, we create a new instance of UserComponent
+        userComponent = userComponentFactory.create()
     }
 }
