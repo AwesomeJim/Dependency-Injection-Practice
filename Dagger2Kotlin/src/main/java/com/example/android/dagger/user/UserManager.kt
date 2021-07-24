@@ -43,7 +43,7 @@ class UserManager @Inject constructor(
      *  When the user logs out, this will be null.
      */
     //var userDataRepository: UserDataRepository? = null
-    
+
     // Add or edit the following lines
     var userComponent: UserComponent? = null
         private set
