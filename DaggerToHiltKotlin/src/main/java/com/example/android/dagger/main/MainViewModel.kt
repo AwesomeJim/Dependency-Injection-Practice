@@ -26,6 +26,7 @@ import javax.inject.Inject
  * @Inject tells Dagger how to provide instances of this type. Dagger also knows
  * that UserDataRepository is a dependency.
  */
+
 class MainViewModel @Inject constructor(private val userDataRepository: UserDataRepository) {
 
     val welcomeText: String
