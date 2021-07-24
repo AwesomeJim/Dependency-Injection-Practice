@@ -30,19 +30,38 @@ private const val PASSWORD_SUFFIX = "password"
 // @Inject tells Dagger how to provide instances of this type
 // Dagger also knows that Storage is a dependency (i.e. Storage) is an interface, we need to tell Dagger how to create an instance of that in a different way,
 @Singleton
-class UserManager @Inject constructor(private val storage: Storage) {
+class UserManager @Inject constructor(
+    private val storage: Storage,
+// Since UserManager will be in charge of managing the UserComponent lifecycle,
+    // it needs to know how to create instances of it
+    private val userComponentFactory: UserComponent.Factory
+) {
 
     /**
      *  UserDataRepository is specific to a logged in user. This determines if the user
      *  is logged in or not, when the user logs in, a new instance will be created.
      *  When the user logs out, this will be null.
      */
-    var userDataRepository: UserDataRepository? = null
+    //var userDataRepository: UserDataRepository? = null
+    
+    // Add or edit the following lines
+    var userComponent: UserComponent? = null
+        private set
 
     val username: String
         get() = storage.getString(REGISTERED_USER)
 
-    fun isUserLoggedIn() = userDataRepository != null
+    fun isUserLoggedIn() = userComponent != null
+
+    fun logout() {
+        userComponent = null
+    }
+
+    private fun userJustLoggedIn() {
+        userComponent = userComponentFactory.create()
+    }
+
+    //fun isUserLoggedIn() = userDataRepository != null
 
     fun isUserRegistered() = storage.getString(REGISTERED_USER).isNotEmpty()
 
@@ -63,9 +82,9 @@ class UserManager @Inject constructor(private val storage: Storage) {
         return true
     }
 
-    fun logout() {
-        userDataRepository = null
-    }
+    // fun logout() {
+    //     userDataRepository = null
+    // }
 
     fun unregister() {
         val username = storage.getString(REGISTERED_USER)
@@ -74,7 +93,7 @@ class UserManager @Inject constructor(private val storage: Storage) {
         logout()
     }
 
-    private fun userJustLoggedIn() {
-        userDataRepository = UserDataRepository(this)
-    }
+    // private fun userJustLoggedIn() {
+    //     userDataRepository = UserDataRepository(this)
+    // }
 }
