@@ -1,3 +1,4 @@
 rootProject.name = "Dagger2Java"
 include ':Dagger2java'
 include ':Dagger2Kotlin'
+include ':DaggerToHiltKotlin'
