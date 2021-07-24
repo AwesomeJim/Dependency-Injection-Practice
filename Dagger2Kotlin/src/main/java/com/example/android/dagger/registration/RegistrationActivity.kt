@@ -24,16 +24,32 @@ import com.example.android.dagger.R
 import com.example.android.dagger.main.MainActivity
 import com.example.android.dagger.registration.enterdetails.EnterDetailsFragment
 import com.example.android.dagger.registration.termsandconditions.TermsAndConditionsFragment
+import javax.inject.Inject
 
 class RegistrationActivity : AppCompatActivity() {
 
+    /**
+    * Because of that, we cannot use the @Inject annotation in the constructor of a View class as we did before (that is what is called constructor injection).
+    *  Instead, we have to use field injection.
+      * For field injection (that is commonly used in Activities and Fragments), we annotate with @Inject the fields that we want Dagger to provide.
+      *
+      * When @Inject is annotated on a class constructor, it's telling Dagger how to provide instances of that class.
+      * When it's annotated on a class field, it's telling Dagger that it needs to populate the field with an instance of that type
+     */
+
+    // @Inject annotated fields will be provided by Dagger
+    @Inject
     lateinit var registrationViewModel: RegistrationViewModel
 
+
     override fun onCreate(savedInstanceState: Bundle?) {
+        // Ask Dagger to inject our dependencies
+        (application as MyApplication).appComponent.inject(this)
+
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_registration)
 
-        registrationViewModel = RegistrationViewModel((application as MyApplication).userManager)
+       // registrationViewModel = RegistrationViewModel((application as MyApplication).userManager)
         supportFragmentManager.beginTransaction()
             .add(R.id.fragment_holder, EnterDetailsFragment())
             .commit()
