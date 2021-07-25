@@ -25,8 +25,23 @@ buildscript {
 
         hilt_version = '2.38'
 
-
+        gradle_version = "4.2.1"
+        core_version = '1.6.0'
+        appcompat_version = '1.3.1'
+        material_version = '1.4.0'
+        constraint_version = '2.0.4'
+        coroutines_version = '1.5.1-native-mt'
+        lifecycle_version = '2.3.1'
+        activity_version = '1.2.4'
+        retrofit_version = '2.9.0'
+        httplogging_version = '5.0.0-alpha.2'
+        json_version = '2.8.7'
+        junit_version = '4.13.2'
+        extjunit_version = '1.1.3'
+        espressocore_version = '3.4.0'
+        timber_version = '4.7.1'
     }
+
     repositories {
         google()
         mavenCentral()
