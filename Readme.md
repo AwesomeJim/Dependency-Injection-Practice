@@ -14,13 +14,13 @@ I found it easier starting off with Dagger Implementation in Java, then Dagger i
 
 #Dagger2 In Java
 I found a very useful blog by [CodingFlow](https://codinginflow.com/tutorials/android/dagger-2) which gave me a very good lift off, very simple,clear and awesome implementation. 
-[x] Dagger 2 in Java [CodingFlow Dagger2 Tutorials](https://codinginflow.com/tutorials/android/dagger-2/part-1-introduction)
+- [x] Dagger 2 in Java [CodingFlow Dagger2 Tutorials](https://codinginflow.com/tutorials/android/dagger-2/part-1-introduction)
 
 #Dagger2 in Kotlin 
 After  grasping the whole concept of Dagger in Java it was time to jump into my favorite train of Kotlin.
 For Kotlin google have a very awesome documentation and a codelab. I took the codeLab
 
-[x] [Using Dagger in your Android app - Kotlin](https://developer.android.com/codelabs/android-dagger#0)
+- [x] [Using Dagger in your Android app - Kotlin](https://developer.android.com/codelabs/android-dagger#0)
 
 #Hilt Codelabs
 To implement hilt I had two approach, 
@@ -33,9 +33,9 @@ To implement hilt I had two approach,
 
 #Other Hilt DI  - Implementations
 
-[x] [Android: Basic app using MVVM, Hilt, Coroutines, Flow, Retrofit, and Coil](https://levelup.gitconnected.com/android-basic-app-using-mvvm-hilt-coroutines-flow-retrofit-and-coil-433763542ee0)
+- [x] [Android: Basic app using MVVM, Hilt, Coroutines, Flow, Retrofit, and Coil](https://levelup.gitconnected.com/android-basic-app-using-mvvm-hilt-coroutines-flow-retrofit-and-coil-433763542ee0)
 
-[x] [Dagger-Hilt + Retrofit + Coroutines](https://rahul9650ray.medium.com/dagger-hilt-retrofit-coroutines-9e8af89500ab)
+- [x] [Dagger-Hilt + Retrofit + Coroutines](https://rahul9650ray.medium.com/dagger-hilt-retrofit-coroutines-9e8af89500ab)
 
 
 
