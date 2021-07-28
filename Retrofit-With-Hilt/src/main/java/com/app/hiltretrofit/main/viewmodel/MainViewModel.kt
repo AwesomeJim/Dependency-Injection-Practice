@@ -22,7 +22,7 @@ class MainViewModel @Inject constructor(private val repository: Repository) : Vi
 
     private fun loadCountries() {
         viewModelScope.launch {
-            val countries = repository.getCountries()
+            val countries = repository.getCountries("", "europe")
             when (countries.isSuccessful) {
                 true -> {
                     with(countries.body().orEmpty()) {
