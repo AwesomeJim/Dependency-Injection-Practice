@@ -49,8 +49,8 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
 
     //hilt
-    implementation 'com.google.dagger:hilt-android:2.38'
-    kapt 'com.google.dagger:hilt-compiler:2.38'
+    implementation 'com.google.dagger:hilt-android:2.38.1'
+    kapt 'com.google.dagger:hilt-compiler:2.38.1'
 
     // Networking
     implementation "com.squareup.retrofit2:retrofit:2.9.0"
