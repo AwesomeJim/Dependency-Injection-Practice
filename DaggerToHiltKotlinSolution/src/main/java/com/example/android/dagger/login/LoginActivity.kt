@@ -25,7 +25,6 @@ import android.widget.TextView
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.widget.doOnTextChanged
-import androidx.lifecycle.Observer
 import com.example.android.dagger.R
 import com.example.android.dagger.main.MainActivity
 import com.example.android.dagger.registration.RegistrationActivity
@@ -43,7 +42,7 @@ class LoginActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
 
-        loginViewModel.loginState.observe(this, Observer<LoginViewState> { state ->
+        loginViewModel.loginState.observe(this, { state ->
             when (state) {
                 is LoginSuccess -> {
                     startActivity(Intent(this, MainActivity::class.java))
